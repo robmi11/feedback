@@ -15,9 +15,13 @@ function FeedbackList({ feedback }) {
 }
 
 FeedbackList.propTypes = {
-  feedback: PropTypes.arrayOf({
-    type: Array,
-  }),
+  feedback: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      rating: PropTypes.number,
+      text: PropTypes.string,
+    })
+  ),
 };
 
 export default FeedbackList;

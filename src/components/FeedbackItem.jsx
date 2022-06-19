@@ -1,21 +1,17 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
-
 import Card from "./shared/Card";
 
-function FeedbackItem({ feedback }) {
-  const [rating, setRating] = useState(6);
-  const [text, setText] = useState("To jest pojedynczy komentarz.");
-
+function FeedbackItem({ item }) {
   return (
-    <div className="card">
-      <Card />
-    </div>
+    <Card reverse={true}>
+      <div className="num-display">{item.rating}</div>
+      <div className="text-display">{item.text}</div>
+    </Card>
   );
 }
 
 FeedbackItem.propTypes = {
-  feedback: PropTypes.array.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 export default FeedbackItem;
