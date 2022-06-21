@@ -1,15 +1,32 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { FaQuestion } from "react-icons/fa";
 
 function Header({ text, bgColor, textColor }) {
   const headerStyle = {
     backgroundColor: bgColor,
     color: textColor,
+    position: "relative",
   };
+
+  const iconStyle = {
+    position: "absolute",
+    right: "50px",
+    fontSize: "20px",
+  };
+
   return (
     <header style={headerStyle}>
       <div className="container">
-        <h2>{text}</h2>
+        <h2>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            {text}
+          </Link>
+        </h2>
       </div>
+      <Link to="/about">
+        <FaQuestion style={iconStyle} />
+      </Link>
     </header>
   );
 }

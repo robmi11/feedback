@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import FeedbackList from "./components/FeedbackList";
 import FeedbackStats from "./components/FeedbackStats";
+import FeedbackForm from "./components/FeedbackForm";
+import AboutPage from "./pages/AboutPage";
 import FeedbackData from "./data/Feedbackdata";
 
 function App() {
@@ -24,14 +27,34 @@ function App() {
       .replace(/[.,]0$/, ""),
   };
 
+  function addFeedback(feedbackAdd) {
+    setFeedback([feedbackAdd, ...feedback]);
+    console.log(feedbackAdd);
+  }
+
   return (
-    <>
+    <Router>
       <Header />
       <div className="container">
-        <FeedbackStats feedbackStats={feedbackStats} />
-        <FeedbackList feedback={feedback} removeFeedback={removeFeedback} />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <FeedbackForm addFeedback={addFeedback} />
+                <FeedbackStats feedbackStats={feedbackStats} />
+                <FeedbackList
+                  feedback={feedback}
+                  removeFeedback={removeFeedback}
+                />
+              </>
+            }
+          />
+          <Route path="/about" element={<AboutPage reverse={true} />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 

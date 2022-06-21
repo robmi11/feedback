@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function FeedbackStats({ feedbackStats }) {
   return (
     <div className="feedback-stats">
@@ -8,5 +10,9 @@ function FeedbackStats({ feedbackStats }) {
     </div>
   );
 }
+
+FeedbackStats.propTypes = {
+  feedbackStats: PropTypes.object.isRequired,
+};
 
 export default FeedbackStats;
