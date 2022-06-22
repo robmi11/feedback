@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
 import { v4 as uuidv4 } from "uuid";
 import Button from "./shared/Button";
 import Card from "./shared/Card";
@@ -6,7 +7,9 @@ import RatingSelect from "./RatingSelect";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-function FeedbackForm({ addFeedback }) {
+function FeedbackForm() {
+  const { addFeedback } = useContext(FeedbackContext);
+
   const [rating, setRating] = useState(10);
   const [text, setText] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);

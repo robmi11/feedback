@@ -1,6 +1,8 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
 
-function FeedbackStats({ feedbackStats }) {
+function FeedbackStats() {
+  const { feedbackStats } = useContext(FeedbackContext);
   return (
     <div className="feedback-stats">
       <div>
@@ -10,9 +12,5 @@ function FeedbackStats({ feedbackStats }) {
     </div>
   );
 }
-
-FeedbackStats.propTypes = {
-  feedbackStats: PropTypes.object.isRequired,
-};
 
 export default FeedbackStats;
