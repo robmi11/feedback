@@ -4,6 +4,8 @@ import Button from "./shared/Button";
 import Card from "./shared/Card";
 import RatingSelect from "./RatingSelect";
 
+import { AnimatePresence, motion } from "framer-motion";
+
 function FeedbackForm({ addFeedback }) {
   const [rating, setRating] = useState(10);
   const [text, setText] = useState("");
@@ -38,24 +40,32 @@ function FeedbackForm({ addFeedback }) {
   }
 
   return (
-    <Card reverse={true}>
-      <form onSubmit={handleFormSubmit}>
-        <h2>Jak oceniasz nasze usługi?</h2>
-        <RatingSelect select={(rating) => setRating(rating)} />
-        <div className="input-group">
-          <input
-            onChange={handleTextChange}
-            type="text"
-            placeholder="Twój komentarz..."
-            value={text}
-          />
-          <Button type="submit" isDisabled={btnDisabled}>
-            Zapisz
-          </Button>
-        </div>
-        {message && <div className="message">{message}</div>}
-      </form>
-    </Card>
+    <AnimatePresence>
+      <Card reverse={true}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <form onSubmit={handleFormSubmit}>
+            <h2>Jak oceniasz nasze usługi?</h2>
+            <RatingSelect select={(rating) => setRating(rating)} />
+            <div className="input-group">
+              <input
+                onChange={handleTextChange}
+                type="text"
+                placeholder="Twój komentarz..."
+                value={text}
+              />
+              <Button type="submit" isDisabled={btnDisabled}>
+                Zapisz
+              </Button>
+            </div>
+            {message && <div className="message">{message}</div>}
+          </form>
+        </motion.div>
+      </Card>
+    </AnimatePresence>
   );
 }
 
