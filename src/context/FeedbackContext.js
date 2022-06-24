@@ -8,9 +8,23 @@ export const FeedbackProvider = ({ children }) => {
     {
       id: uuidv4(),
       rating: 10,
-      text: "Ten komentarz pochodzi z context.",
+      text: "To jest komentarz nr 1.",
+    },
+    {
+      id: uuidv4(),
+      rating: 3,
+      text: "To jest komentarz nr 2.",
+    },
+    {
+      id: uuidv4(),
+      rating: 7,
+      text: "To jest komentarz nr 3.",
     },
   ]);
+  const [feedbackEdit, setFeedbackEdit] = useState({
+    item: {},
+    edit: false,
+  });
 
   const feedbackStats = {
     num: feedback.length,
@@ -24,6 +38,7 @@ export const FeedbackProvider = ({ children }) => {
   };
 
   function addFeedback(feedbackAdd) {
+    feedbackAdd.id = uuidv4();
     setFeedback([feedbackAdd, ...feedback]);
   }
 
@@ -33,13 +48,29 @@ export const FeedbackProvider = ({ children }) => {
     }
   }
 
+  function editFeedback(item) {
+    setFeedbackEdit({
+      item,
+      edit: true,
+    });
+  }
+
+  function updateFeedback(id, updItem) {
+    setFeedback(
+      feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+    );
+  }
+
   return (
     <FeedbackContext.Provider
       value={{
         feedback,
+        feedbackEdit,
         feedbackStats,
         addFeedback,
         deleteFeedback,
+        editFeedback,
+        updateFeedback,
       }}
     >
       {children}

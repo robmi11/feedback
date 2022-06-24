@@ -4,8 +4,7 @@ import FeedbackItem from "./FeedbackItem";
 import { motion, AnimatePresence } from "framer-motion";
 
 function FeedbackList() {
-  const { feedback, removeFeedback } = useContext(FeedbackContext);
-  console.log(feedback);
+  const { feedback } = useContext(FeedbackContext);
   if (!feedback || feedback.length === 0) {
     return <h2>Brak komentarzy...</h2>;
   }
@@ -19,11 +18,7 @@ function FeedbackList() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <FeedbackItem
-              key={index}
-              item={item}
-              removeFeedback={removeFeedback}
-            />
+            <FeedbackItem key={index} item={item} />
           </motion.div>
         ))}
       </AnimatePresence>
