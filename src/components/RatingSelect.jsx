@@ -6,7 +6,9 @@ function RatingSelect({ select }) {
   const { feedbackEdit } = useContext(FeedbackContext);
 
   useEffect(() => {
-    setSelected(feedbackEdit.item.rating);
+    if (feedbackEdit.edit === true) {
+      setSelected(feedbackEdit.item.rating);
+    }
   }, [feedbackEdit]);
 
   function handleChange(event) {

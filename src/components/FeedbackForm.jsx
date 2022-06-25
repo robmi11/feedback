@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import FeedbackContext from "../context/FeedbackContext";
-import { v4 as uuidv4 } from "uuid";
 import Button from "./shared/Button";
 import Card from "./shared/Card";
 import RatingSelect from "./RatingSelect";
@@ -40,17 +39,15 @@ function FeedbackForm() {
   function handleFormSubmit(event) {
     event.preventDefault();
 
-    if (text.trim().length > 10) {
-      const newFeedback = {
-        rating,
-        text,
-      };
-    }
+    const newFeedback = {
+      rating,
+      text,
+    };
 
     if (feedbackEdit.edit === true) {
-      updateFeedback(feedbackEdit.item.id, { text, rating });
+      updateFeedback(feedbackEdit.item.id, newFeedback);
     } else {
-      addFeedback({ text, rating });
+      addFeedback(newFeedback);
     }
 
     setText("");
